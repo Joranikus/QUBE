@@ -1,0 +1,112 @@
+# Byte-compiled / optimized / DLL files
+__pycache__/
+*.py[cod]
+*$py.class
+Data
+
+# C extensions
+*.so
+
+# Distribution / packaging
+.Python
+build/
+develop-eggs/
+dist/
+downloads/
+eggs/
+.eggs/
+lib/
+lib64/
+parts/
+sdist/
+var/
+wheels/
+*.egg-info/
+.installed.cfg
+*.egg
+MANIFEST
+
+# PyInstaller
+# Usually contains binary files
+*.manifest
+*.spec
+
+# Installer logs
+pip-log.txt
+pip-delete-this-directory.txt
+
+# Unit test / coverage reports
+htmlcov/
+.tox/
+.coverage
+.coverage.*
+.cache
+nosetests.xml
+coverage.xml
+*.cover
+*.py,cover
+.hypothesis/
+.pytest_cache/
+
+# PyCharm
+.idea/
+*.iml
+*.iws
+
+# Visual Studio
+.vscode/
+*.code-workspace
+
+# Jupyter Notebook checkpoints
+.ipynb_checkpoints
+
+# macOS
+.DS_Store
+
+# Windows
+Thumbs.db
+ehthumbs.db
+
+# Editor specific
+*.swp
+*.swo
+*~
+
+# Logs and other output
+*.log
+*.out
+
+# Virtual environment
+venv/
+ENV/
+env/
+venv.bak/
+__pypackages__/
+
+# Local development environment
+.localenv
+.localsettings
+
+# Coverage reports
+htmlcov/
+
+# Django stuff:
+*.log
+*.pot
+*.pyc
+*.pyo
+.mypy_cache/
+.pyre/
+
+# SQL
+*.sqlite3
+
+# Spyder project settings
+.spyderproject
+
+# VS Code workspace settings
+.vscode/
+
+# Pylint and mypy
+.pylintrc
+.mypy.ini
