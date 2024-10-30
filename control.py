@@ -1,13 +1,15 @@
+import time
+
 from PID import *
 
 # Arduino COM port
-COM_PORT = "COM4"
+COM_PORT = "COM5"
 
 # Using mac?
 USING_MAC = False
 
 # Target values
-MOTOR_TARGET_ANGLE = 0  # degrees
+MOTOR_TARGET_ANGLE = 90  # degrees
 PENDULUM_TARGET_ANGLE = 0  # degrees
 MOTOR_TARGET_RPM = 0  # rpm (max 3500)
 
@@ -15,27 +17,42 @@ pid = PID()
 
 
 # Main function to control. Must return the voltage (control signal) to apply to the motor.
+I = 0
+prev_error = 0
+D_filtered = 0
+D = 0
+timer = 0
+voltage = 0
+
+pid.kp = 0.01
+pid.ki = 0.03
+pid.kd = 0.0005
 def control_system(dt, motor_angle, pendulum_angle, rpm):
+
 #0.01 0.03 0.0005
     global timer
     global MOTOR_TARGET_ANGLE
+    global MOTOR_TARGET_RPM
+
     global I
     global prev_error
     global D_filtered
     global D
-
+    global voltage
 
 
     timer += dt
-    if timer > 3:
-        if MOTOR_TARGET_ANGLE < 90:
-            MOTOR_TARGET_ANGLE = 90
+    if timer > 7:
+        if MOTOR_TARGET_RPM == 2000:
+            MOTOR_TARGET_RPM = 1000
+            voltage=5
         else:
-            MOTOR_TARGET_ANGLE = 0
+            MOTOR_TARGET_RPM = 2000
+            voltage=10
         timer = 0
 
-    error = MOTOR_TARGET_ANGLE - motor_angle
-
+    #error = MOTOR_TARGET_ANGLE - motor_angle
+    error = MOTOR_TARGET_RPM - rpm
 
     P = pid.kp * error
     I += pid.ki * error * dt
@@ -51,12 +68,13 @@ def control_system(dt, motor_angle, pendulum_angle, rpm):
 
     prev_error = error
 
-    u = P + I + D_filtered
-
+    #u = P + I + D_filtered
+    u = voltage
     return u
+
 
 
 # This function is used to tune the PID controller with the GUI.
 def setPidParams(_pid):
-    # pid.copy(_pid)  # Uncomment this line if you want to use the GUI to tune your PID live.
+    pid.copy(_pid)  # Uncomment this line if you want to use the GUI to tune your PID live.
     return 0
