@@ -3,7 +3,7 @@ import time
 from PID import *
 
 # Arduino COM port
-COM_PORT = "COM5"
+COM_PORT = "/dev/ttyACM0"
 
 # Using mac?
 USING_MAC = False
@@ -42,16 +42,7 @@ def control_system(dt, motor_angle, pendulum_angle, rpm):
 
 
     timer += dt
-    if timer > 7:
-        if MOTOR_TARGET_RPM == 2000:
-            MOTOR_TARGET_RPM = 1000
-            voltage=5
-        else:
-            MOTOR_TARGET_RPM = 2000
-            voltage=10
-        timer = 0
 
-    #error = MOTOR_TARGET_ANGLE - motor_angle
     error = MOTOR_TARGET_RPM - rpm
 
     P = pid.kp * error
@@ -68,8 +59,7 @@ def control_system(dt, motor_angle, pendulum_angle, rpm):
 
     prev_error = error
 
-    #u = P + I + D_filtered
-    u = voltage
+    u = P + I + D_filtered
     return u
 
 
