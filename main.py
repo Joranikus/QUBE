@@ -77,7 +77,7 @@ def control(data, lock):
         qube.setMotorVoltage(u)
 
 
-def getDT():
+def getDT():    
     global t_last
     t_now = time()
     dt = t_now - t_last
